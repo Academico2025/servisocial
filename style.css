@@ -46,8 +46,12 @@ header {
 }
 
 .logo {
-  width: 90px;
+  width: 70px;
+  height: auto;
   margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 main {
