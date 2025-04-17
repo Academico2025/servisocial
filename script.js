@@ -45,14 +45,16 @@ function generarConstancia() {
     error.classList.remove("hidden");
   }
 }
-
 function imprimirConstancia() {
   const numeroDocumento = document.getElementById("numeroDocumento").value;
   const contenido = document.querySelector(".pagina").innerHTML;
 
-  // Crear un canvas para el QR
+  // Generar URL personalizada con el número del estudiante
+  const urlQR = `https://ievascobal.edu.co/category/estudiantes/${numeroDocumento}`;
+
+  // Crear el QR
   const qr = new QRious({
-    value: numeroDocumento, // Puedes poner también una URL personalizada
+    value: urlQR,
     size: 100
   });
 
@@ -108,18 +110,18 @@ function imprimirConstancia() {
   ventana.document.write('</style></head><body>');
 
   ventana.document.write(`
-    <img src="marca-de-agua.png" class="marca-agua">
+    <img src="img/marca-de-agua.png" class="marca-agua">
     <div class="pagina">
       ${contenido}
       <div class="qr-container">
-        <h4 style="text-align:center;">Código de verificación:</h4>
+        <h4 style="text-align:center;">Escanee para verificar:</h4>
         <img src="${qr.toDataURL()}" class="qr" alt="Código QR">
+        <p style="text-align:center; font-size: 12px;">${urlQR}</p>
       </div>
     </div>
   `);
 
   ventana.document.write('</body></html>');
-
   ventana.document.close();
   ventana.focus();
   ventana.print();
