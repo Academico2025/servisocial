@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Constancia Servicio Social</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="busqueda">
+    <h1>Generar constancia de Servicio Social Obligatorio</h1>
+    <input type="text" id="docInput" placeholder="Ingrese número de documento">
+    <button onclick="generarConstancia()">Generar</button>
+    <p id="error" class="error hidden">Documento no encontrado. Verifique e intente de nuevo.</p>
+  </div>
+
+  <div class="pagina hidden" id="constancia">
+    <header>
+      <img src="logo.png" alt="Logo IE" class="logo">
+      <h2>INSTITUCIÓN EDUCATIVA VASCO NÚÑEZ DE BALBOA</h2>
+      <p>Código DANE: 119075000020 – Municipio de Balboa, Cauca</p>
+    </header>
+
+    <main>
+      <h3>CONSTANCIA DE CUMPLIMIENTO DE SERVICIO SOCIAL OBLIGATORIO</h3>
+      <p>La Institución Educativa Vasco Núñez de Balboa certifica que el(la) estudiante <strong><span id="nombreEstudiante"></span></strong>, identificado(a) con número de documento <strong><span id="numeroDocumento"></span></strong>, perteneciente al grado <strong><span id="grado"></span></strong> en la jornada <strong><span id="jornada"></span></strong>, ha cumplido satisfactoriamente <strong><span id="horas"></span> horas</strong> del Servicio Social Obligatorio contemplado en la Resolución 4210 de septiembre 12 de 1996.</p>
+
+      <p>Este servicio fue desarrollado dentro del proyecto institucional: <em>"<span id="proyecto"></span>"</em>, dando muestra de compromiso social, participación comunitaria y formación ciudadana.</p>
+
+      <p style="margin-top: 30px;">Fecha de generación: <span id="fechaActual"></span></p>
+    </main>
+
+    <footer>
+      <div class="firma-footer">
+        <img src="firma.png" alt="Firma Coordinador">
+        <p><strong>CARLOS MARTIN MUÑOZ B.</strong><br>Coordinador (E)</p>
+      </div>
+      <div class="sello">Institución Educativa Vasco Núñez de Balboa – Balboa, Cauca</div>
+    </footer>
+
+    <button onclick="imprimirConstancia()" class="imprimir-btn">Imprimir PDF</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
