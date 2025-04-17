@@ -54,7 +54,7 @@ function imprimirConstancia() {
   ventana.document.write('<style>');
   ventana.document.write(`
     @page {
-      size: A4;
+      size: Carta;
       margin: 0;
     }
 
@@ -62,7 +62,7 @@ function imprimirConstancia() {
       font-family: Arial, sans-serif;
       padding: 40px 60px;
       width: 21cm;
-      min-height: 29.7cm;
+      min-height: 27.8cm;
       position: relative;
     }
 
