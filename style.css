@@ -46,11 +46,13 @@ header {
 }
 
 .logo {
-  width: 50px;
+    width: 2cm;
+    height: 2cm;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px auto;
   display: block;
-  height: auto;
   margin-bottom: 10px;
-  display: block;
   margin-left: auto;
   margin-right: auto;
   }
