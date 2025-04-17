@@ -1,4 +1,3 @@
-// Lista de estudiantes autorizados con todos los datos
 const estudiantesAutorizados = [
   {
     doc: "1234567890",
@@ -15,44 +14,29 @@ const estudiantesAutorizados = [
     jornada: "Tarde",
     horas: 80,
     proyecto: "Huerta escolar y bienestar estudiantil"
-  },
-  {
-    doc: "1122334455",
-    nombre: "Carlos Ruiz",
-    grado: "11°",
-    jornada: "Mañana",
-    horas: 80,
-    proyecto: "Refuerzo académico en matemáticas"
   }
 ];
 
 function generarConstancia() {
   const docInput = document.getElementById("docInput").value.trim();
+  const estudiante = estudiantesAutorizados.find(e => e.doc === docInput);
+
   const constancia = document.getElementById("constancia");
   const error = document.getElementById("error");
 
-  const nombreEstudiante = document.getElementById("nombreEstudiante");
-  const numeroDocumento = document.getElementById("numeroDocumento");
-  const grado = document.getElementById("grado");
-  const jornada = document.getElementById("jornada");
-  const horas = document.getElementById("horas");
-  const proyecto = document.getElementById("proyecto");
-  const fechaActual = document.getElementById("fechaActual");
-
-  const hoy = new Date();
-  const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
-  const fechaFormateada = hoy.toLocaleDateString('es-ES', opciones);
-
-  const estudiante = estudiantesAutorizados.find(e => e.doc === docInput);
-
   if (estudiante) {
-    nombreEstudiante.textContent = estudiante.nombre;
-    numeroDocumento.textContent = estudiante.doc;
-    grado.textContent = estudiante.grado;
-    jornada.textContent = estudiante.jornada;
-    horas.textContent = estudiante.horas;
-    proyecto.textContent = estudiante.proyecto;
-    fechaActual.textContent = fechaFormateada;
+    document.getElementById("nombreEstudiante").textContent = estudiante.nombre;
+    document.getElementById("numeroDocumento").textContent = estudiante.doc;
+    document.getElementById("grado").textContent = estudiante.grado;
+    document.getElementById("jornada").textContent = estudiante.jornada;
+    document.getElementById("horas").textContent = estudiante.horas;
+    document.getElementById("proyecto").textContent = estudiante.proyecto;
+
+    const hoy = new Date();
+    const fechaFormateada = hoy.toLocaleDateString('es-ES', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+    document.getElementById("fechaActual").textContent = fechaFormateada;
 
     constancia.classList.remove("hidden");
     error.classList.add("hidden");
@@ -69,18 +53,45 @@ function imprimirConstancia() {
   ventana.document.write('<html><head><title>Constancia Servicio Social</title>');
   ventana.document.write('<style>');
   ventana.document.write(`
-    body { font-family: Arial, sans-serif; padding: 50px; width: 21cm; min-height: 29.7cm; }
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px 60px;
+      width: 21cm;
+      min-height: 29.7cm;
+      position: relative;
+    }
+
+    .marca-agua {
+      position: fixed;
+      top: 25%;
+      left: 15%;
+      width: 70%;
+      opacity: 0.05;
+      z-index: -1;
+    }
+
     header, footer { text-align: center; }
     .firma-footer img { width: 150px; margin-top: 30px; }
     .firma-footer p { margin-top: 5px; }
-    main { margin-top: 30px; font-size: 18px; line-height: 1.6; }
-    .sello { margin-top: 40px; font-size: 14px; text-align: center; color: #555; }
+    main { font-size: 18px; line-height: 1.6; margin-top: 30px; }
+    .sello { font-size: 14px; color: #555; margin-top: 20px; }
     img { max-width: 100%; }
   `);
   ventana.document.write('</style></head><body>');
-  ventana.document.write('<div class="pagina">');
-  ventana.document.write(contenido);
-  ventana.document.write('</div></body></html>');
+
+  ventana.document.write(`
+    <img src="marca-de-agua.png" class="marca-agua">
+    <div class="pagina">
+      ${contenido}
+    </div>
+  `);
+
+  ventana.document.write('</body></html>');
 
   ventana.document.close();
   ventana.focus();
