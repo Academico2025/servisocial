@@ -47,7 +47,15 @@ function generarConstancia() {
 }
 
 function imprimirConstancia() {
+  const numeroDocumento = document.getElementById("numeroDocumento").value;
   const contenido = document.querySelector(".pagina").innerHTML;
+
+  // Crear un canvas para el QR
+  const qr = new QRious({
+    value: numeroDocumento, // Puedes poner también una URL personalizada
+    size: 100
+  });
+
   const ventana = window.open('', '', 'height=900,width=700');
 
   ventana.document.write('<html><head><title>Constancia Servicio Social</title>');
@@ -61,9 +69,17 @@ function imprimirConstancia() {
     body {
       font-family: Arial, sans-serif;
       padding: 40px 60px;
-      width: 21cm;
-      min-height: 27.8cm;
+      width: 21,5cm;
+      min-height: 27.9cm;
       position: relative;
+    }
+
+    .logo {
+      width: 2cm;
+      height: 2cm;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px auto;
     }
 
     .marca-agua {
@@ -73,6 +89,13 @@ function imprimirConstancia() {
       width: 70%;
       opacity: 0.05;
       z-index: -1;
+    }
+
+    .qr {
+      display: block;
+      margin: 40px auto 0 auto;
+      width: 100px;
+      height: 100px;
     }
 
     header, footer { text-align: center; }
@@ -88,6 +111,10 @@ function imprimirConstancia() {
     <img src="marca-de-agua.png" class="marca-agua">
     <div class="pagina">
       ${contenido}
+      <div class="qr-container">
+        <h4 style="text-align:center;">Código de verificación:</h4>
+        <img src="${qr.toDataURL()}" class="qr" alt="Código QR">
+      </div>
     </div>
   `);
 
